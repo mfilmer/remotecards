@@ -4,6 +4,7 @@
 #from twisted.internet import reactor
 
 from gi.repository import Gtk
+from gi.repository import Gdk
 
 class EventHandler(object):
     def gtk_main_quit(self, *args):
@@ -19,6 +20,11 @@ class EventHandler(object):
     def on_chatbutton_clicked(self, *args):
         chatwindow = builder.get_object("chatwindow")
         chatwindow.show_all()
+    
+    def on_chatentryview_key_press_event(self, widget, event):
+        if event.keyval == 65293 and not event.state & Gdk.ModifierType.SHIFT_MASK:
+            print "sending"
+            return True
         
     #def on_playerstreeview_selection_changed(self, *args):
     #    print "selected I guess"
